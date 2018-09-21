@@ -16,11 +16,11 @@ String html = '''
    <h1>hello</h1>
  </body>
 </html>
-'''
+''';
 
 main() {
-  var tree = Etree.fromString(html);
-  print(tree.xpath('//*[@id="content"]/h1/text()'[0].name); // print hello
+  var tree = ETree.fromString(html);
+  print(tree.xpath('//*[@id="content"]/h1/text()')[0].name); // print hello
 }
 ```
 
