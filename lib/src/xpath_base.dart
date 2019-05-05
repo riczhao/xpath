@@ -45,7 +45,6 @@ class BuildTree {
   int _current;
   int _max_idx;
   Element _parent;
-  int _depth = 0;
 
   Element rootElement = Element()..type = ElementType.Root;
 
@@ -55,7 +54,6 @@ class BuildTree {
 
   bool build() {
     _current = 0;
-    _depth = 0;
     _parent = rootElement;
 
     while (_current < _max_idx) {
@@ -140,7 +138,6 @@ class BuildTree {
     _current += m.end;
     _parent.end = _current;
     _parent = _parent.parent;
-    _depth--;
     return true;
   }
 
@@ -190,7 +187,6 @@ class BuildTree {
     _parent.children.add(e);
     if (!selfClosure) {
       _parent = e;
-      _depth++;
     }
 
     return true;
