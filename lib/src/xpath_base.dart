@@ -16,7 +16,7 @@ class ETree {
   List<Element> xpath(String xp) => rootElement.xpath(xp);
 }
 
-enum ElementType { Root, Tag, Declare, Comment, Text }
+enum ElementType { Root, Tag, Declare, Comment, Text, XMLDeclaration }
 
 class Element {
   ElementType type;
@@ -39,6 +39,7 @@ var regDeclare = RegExp(r'^<![^-][^-][\s\S]*?>');
 var regComment = RegExp(r'^<!--[\s\S]*?-->');
 var regText = RegExp(r'^[^<]*');
 var regString = RegExp(r''''.*?'|".*?"''');
+var regXMLDeclaration = RegExp(r'^<?[\s\S]*?>');
 
 class BuildTree {
   String _html;
@@ -96,6 +97,9 @@ class BuildTree {
       case '/':
         return _nextEndTag();
         break;
+      case '?':
+        return _nextXMLDeclaration();
+        break;
       default:
         return _nextStartTag();
         break;
@@ -109,6 +113,19 @@ class BuildTree {
     Element e = Element();
     e.type = ElementType.Comment;
     e.start = _current; // start from <!--
+    _current += m.end;
+    e.end = _current;
+    e.parent = _parent;
+    _parent.children.add(e);
+    return true;
+  }
+
+  bool _nextXMLDeclaration() {
+    var m = regXMLDeclaration.firstMatch(_html.substring(_current));
+    if (m == null) return false;
+    Element e = Element();
+    e.type = ElementType.XMLDeclaration;
+    e.start = _current; // start from <?
     _current += m.end;
     e.end = _current;
     e.parent = _parent;
