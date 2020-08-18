@@ -1,3 +1,8 @@
+[![pub package](https://img.shields.io/pub/v/xpath.svg)](https://pub.dev/packages/xpath)
+[![likes](https://badges.bar/xpath/likes)](https://pub.dev/packages/xpath/score)
+[![popularity](https://badges.bar/xpath/popularity)](https://pub.dev/packages/xpath/score)
+[![pub points](https://badges.bar/xpath/pub%20points)](https://pub.dev/packages/xpath/score) 
+
 A library for Dart developers.
 
 Created from templates made available by Stagehand under a BSD-style
