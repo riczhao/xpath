@@ -10,5 +10,5 @@ String html = '''
 
 main() {
   var tree = ETree.fromString(html);
-  print(tree.xpath('//*[@id="content"]/h1/text()')[0].name); // print hello
+  print(tree.xpath('//*[@id="content"]/h1/text()')![0].name); // print hello
 }
